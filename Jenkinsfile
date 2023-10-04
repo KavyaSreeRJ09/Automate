@@ -14,7 +14,15 @@ pipeline {
     //The values for these user-specified parameters are made available to Pipeline steps via the params object, see
     //the Parameters, Declarative Pipeline for its specific usage.
     parameters {
-        string(name: 'SPEC', defaultValue: 'cypress/e2e/UnitTest/**/*.spec.js', description: 'Path to Cypress spec files')
+        choice(
+            name: 'SPEC',
+            choices: [
+                'cypress/e2e/UnitTest/**/*.spec.js',
+                'cypress/e2e/Sat2farm/**/*.spec.js',
+                'cypress/e2e/zPerformTests/**/*.spec.js'
+            ],
+            description: 'Path to Cypress spec files'
+        )
         choice(name: 'BROWSER', choices: ['chrome', 'edge', 'firefox'], description: 'Pick the web browser you want to use to run your scripts')
     }
     
