@@ -41,9 +41,9 @@ pipeline {
             }
         }
         
-        stage('Deploy'){
+        stage('Status'){
             steps {
-                echo "Deploying"
+                echo "Automated successfully"
             }
         }
     }
