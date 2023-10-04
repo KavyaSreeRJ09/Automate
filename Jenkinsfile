@@ -2,8 +2,7 @@ pipeline {
     agent any
     
     environment {
-        BUILD_USER = ''
-        BROWSER = params.BROWSER // Assign the value of the BROWSER parameter to an environment variable
+        BROWSER = params.BROWSER
     }
     
     parameters {
@@ -11,27 +10,26 @@ pipeline {
         choice(name: 'BROWSER', choices: ['chrome', 'edge', 'firefox'], description: 'Pick the web browser you want to use to run your scripts')
     }
     
-    options {
-        ansiColor('xterm')
-    }
-
     stages {
-        stage('Build'){
+        stage('Build') {
             steps {
                 echo "Building the application"
+                // Add your build steps here
             }
         }
         
         stage('Testing') {
             steps {
-                bat "npm i"
-                bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
+                ansiColor('xterm') // Enable ANSI color support
+                bat "npm i" // Install dependencies
+                bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}" // Run Cypress tests
             }
         }
         
-        stage('Deploy'){
+        stage('Deploy') {
             steps {
                 echo "Deploying"
+                // Add your deployment steps here
             }
         }
     }
